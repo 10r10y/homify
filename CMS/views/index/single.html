@@ -1,0 +1,157 @@
+﻿   <%- include("common/header.html") %> 
+
+	<!-- Proparty area -->
+    <section class="property_single">
+        <div class="flat">
+            <img src="img/property_single/flat.jpg" alt="">
+        </div>
+            <div class="container coustome-container">
+              <% project.forEach(item=>{%>
+                <div class="flat_details">
+                    <h1><%=item.project_title%></h1>
+                    <h5><%=item.project_price%></h5>
+                    <div class="for_rent row">
+                        <div class="col-md-4 col-sm-6 listing">
+                            <img src="img/property_single/rent.png" alt="">
+                            <h4>仅供出租</h4>
+                            <p>To a general advertiser outdoor advertising is worthy of consideration. Outdoor advertising is considered as</p>
+                        </div>
+                        <div class="col-md-4 col-sm-6 listing">
+                            <img src="img/property_single/office.png" alt="">
+                            <h4>办公室/大学</h4>
+                            <p>Spielberg,s blockbuster,is set in the year 2054. The future  at least according to a team of </p>
+                        </div>
+                        <div class="col-md-4 col-sm-6 listing">
+                            <img src="img/property_single/california.png" alt="">
+                            <h4>太原/尖草坪区</h4>
+                            <p>Branding is no longer simply about visual appeal or the cherry in the apple pie example</p>
+                        </div>
+                    </div>
+                </div>
+               <%})%>
+
+               <% project.forEach(item=>{%>
+                <div class="about_property">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="fun_fact">
+                                <h2>关于此房产</h2>
+                                <p><%-item.project_content%></p>
+                                <div class="row counter_inner text-center">
+                                    <div class="counter_up col-md-3 col-sm-6">
+                                        <div class="counter_item">
+                                            <img src="img/property_single/bedrooms.png" alt="">
+                                            <span class="counter"><%=item.p_bedchamber%></span>
+                                            <p>卧室</p>
+                                        </div>
+                                    </div>
+                                    <div class="counter_up col-md-3 col-sm-6">
+                                        <div class="counter_item">
+                                            <img src="img/property_single/bathrooms.png" alt="">
+                                            <span class="counter"><%=item.p_toilet%></span>
+                                            <p>卫生间</p>
+                                        </div>
+                                    </div>
+                                    <div class="counter_up col-md-3 col-sm-6">
+                                        <div class="counter_item">
+                                            <img src="img/property_single/parking.png" alt="">
+                                            <span class="counter"><%=item.p_parkingspace%></span>
+                                            <p>停车位</p>
+                                        </div>
+                                    </div>
+                                    <div class="counter_up col-md-3 col-sm-6">
+                                        <div class="counter_item">
+                                            <img src="img/property_single/kitchen.png" alt="">
+                                            <span class="counter"><%=item.p_kitchen%></span>
+                                            <p>厨房</p>
+                                        </div>
+                                    </div>
+                                 </div>
+                               </div>
+                           <div class="additional_details row">
+                               <h2>最新房源详细信息</h2>
+                                <!-- Nav tabs -->
+                                <div class="col-md-6 nav_tabs">
+                                    <ul class="nav" role="tablist">
+                                        <% home.forEach(item=>{%>
+                                        <li><a href="#<%=item.home_id%>" data-toggle="tab"><%=item.home_name%></a></li>
+                                        <%})%>
+                                        <!-- <li class="active"><a href="#2" data-toggle="tab">关于建筑</a></li>
+                                        <li><a href="#1" data-toggle="tab">关于建筑</a></li> -->
+                                    </ul>
+                                </div>
+                                <!-- Tab panes -->
+                                <div class="col-md-6 tab-content">
+                                    <% home.forEach(item=>{%>
+                                        <div role="tabpanel" class="tab-pane" id="<%=item.home_id%>">
+                                        <p><%-item.home_content%></p>
+                                    </div>
+                                  <%})%>
+                                    <!-- <div role="tabpanel" class="tab-pane" id="3">
+                                        <p>I get calls every week from lawyers saying they’re not getting calls anymore from yellow page advertising. Having done quite well in the past, they’re afraid to discontinue the advertising. They want to know what’s going on and what to do.</p>
+                                    </div> -->
+                                </div>
+                            </div>
+                       </div>
+                       
+                     <% agent.forEach(item=>{%>
+                      <div class="col-md-4">
+                       <div class="agent">
+                           <h4>热门代理</h4>
+                        <div class="agent_info">
+                            <div class="profile_info">
+                                <div class="profile_pic">
+                                    <img class="img-circle" src="<%=item.agent_img%>" alt="">
+                                </div>
+                                <div class="name_position">
+                                    <h3><%=item.agent_name%></h3>
+                                    <h6>房地产经纪人</h6>
+                                </div>
+                            </div>
+                            <div class="more_info">
+                                <ul>
+                                    <li><a href=""><i class="fa fa-phone" aria-hidden="true"></i><%=item.agent_number%></a></li>
+                                    <li><a href=""><i class="fa fa-envelope" aria-hidden="true"></i>家居网@email.com</a></li>
+                                    <li><a href=""><i class="fa fa-map-marker" aria-hidden="true"></i> 学院路3号</a></li>
+                                </ul>
+                                <p><%-item.agent_content%></p>
+                            </div>
+                        </div>
+                        <div class="sent_message">
+                            <form>
+                                <a href="/index/list" class="Contact">寻找房产<i class="lnr lnr-arrow-right"></i></a>
+                            </form>
+                        </div>
+                     </div>
+                    <%})%>
+                    </div>
+                </div>
+              <%})%>
+            </div>
+        </div>
+    </section>
+	<!-- End Proparty area -->
+
+     <!-- 底部 -->
+	<%- include("common/footer.html") %>
+    
+    <!--jQuery JS-->
+    <script src="js/jquery-1.12.0.min.js"></script>
+    <!--Bootstrap JS-->
+    <script src="js/bootstrap.min.js"></script> 
+    <!--Bootstrap-select JS-->
+    <script src="vendors/bootstrap-select/bootstrap-select.min.js"></script>
+    <!--Flexslider JS-->
+    <script src="vendors/flexslider/js/jquery.flexslider.js"></script>
+    <!--Owl Carousel JS-->
+    <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
+    <!-- Counterup JS -->
+    <script src="js/waypoints.min.js"></script>
+    <script src="vendors/counter/jquery.counterup.min.js"></script>
+    <!--jQuery ui JS-->
+	<script src="js/jquery-ui.min.js"></script>
+   
+    <!--Theme-->
+    <script src="js/theme.js"></script>
+</body>
+</html>

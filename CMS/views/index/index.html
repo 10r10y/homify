@@ -1,0 +1,284 @@
+﻿ <%- include("common/header.html") %> 
+
+    <!--头部开始 --> 
+	<section class="banner">
+		<div class="swiper mySwiper">
+			<div class="swiper-wrapper">
+				<% banner.forEach(item=>{%>
+			  <div class="swiper-slide"> <img src="<%=item.banner_img%>" alt=""> </div>
+				<%})%>
+			  <!-- <div class="swiper-slide">Slide 2</div>
+			  <div class="swiper-slide">Slide 3</div> -->
+			 
+			</div>
+			<div class="swiper-button-next"></div>
+			<div class="swiper-button-prev"></div>
+			<div class="swiper-pagination"></div>
+		  </div>
+	</section>  
+    <!-- 头部结束 --> 
+    
+    <!-- Slider_area -->
+    <section class="slider row">
+       <div class="container coustome-container"> 
+           <div class="row flexslider-hed">
+               <h2>特色房源</h2>
+                <div id="slider" class="flexslider main_slider">
+                    <ul class="slides slide-bottom"> 
+						 <% home.forEach(item=>{%>
+							<li>   
+								<div class="col-md-5 p0">
+									<div class="right-area"> 
+										<h3><%= item.home_name %></h3>
+										<a href="" class="btn-slide left">出售</a>
+										<a href="" class="btn-slide activ">可用</a> 
+										<a href="" class="btn-slide activ"><%= item.home_location %></a> 
+										<ul class="info">
+											<li><i class="lnr lnr-tag"></i> 卧室:<%= item.bedchamber %></li>
+											<li><i class="lnr lnr-tag"></i> 厨房:<%= item.kitchen %></li>
+											<li><i class="lnr lnr-tag"></i> 客厅:<%= item.Living_room %></li>
+											<li><i class="lnr lnr-tag"></i> 卫生间:<%= item.toilet %></li>
+											<li><i class="lnr lnr-tag"></i> 停车位: <%= item.parking_space %></li>
+											<li><i class="lnr lnr-tag"></i> 便利店:<%= item.kitchen %></li>
+										</ul>
+										<a href="#" class="info-book">现在就预订<i class="lnr lnr-arrow-right"></i></a>
+										<h1><%= item.home_price %></h1> 
+									</div> 
+								</div>
+							   <div class="col-md-7 team p0">
+									<img src="<%= item.home_img %>" alt="" />
+								</div>
+							</li> 
+						<% })%> 
+					
+                        <!-- <li>   
+                            <div class="col-md-5 p0">
+								<div class="right-area"> 
+									<h3>粉色的城市，山西大同</h3>
+									<a href="" class="btn-slide left">出售</a>
+									<a href="" class="btn-slide activ">可用</a> 
+									<ul class="info">
+										<li><i class="lnr lnr-tag"></i>厨房: 1</li>
+										<li><i class="lnr lnr-tag"></i> 卧室: 5</li>
+										<li><i class="lnr lnr-tag"></i> 卫生间: 6</li>
+										<li><i class="lnr lnr-tag"></i> 客厅: 2</li>
+										<li><i class="lnr lnr-tag"></i> 便利店: 3</li>
+										<li><i class="lnr lnr-tag"></i> 停车位: 3</li>
+									</ul>
+									<a href="#" class="info-book">现在就预订<i class="lnr lnr-arrow-right"></i></a>
+									<h1>$12,050</h1> 
+								</div> 
+							</div>
+                           <div class="col-md-7 team p0">
+                            	<img src="img/slider_top_img.png" alt="" />
+                            </div>
+                        </li>  -->
+                    </ul> 
+                </div>
+            </div>
+        </div> 
+        <div id="carousel" class="flexslider thumnil">
+            <ul class="slides">
+				<% home.forEach(item=>{%>
+					<li> <img src="<%= item.home_img %>" title="<%= item.home_name %>" alt="" /></li>
+				<% })%>
+                <!-- <li><img src="img/slider_slides_2.png" alt="" /></li>
+                <li><img src="img/slider_slides_3.png" alt="" /></li>
+                <li><img src="img/slider_slides_6.png" alt="" /></li> -->
+            </ul> 
+        </div> 
+    </section>
+     <!-- End Slider_area -->
+     
+     <!-- It-Work -->
+     <section class="row it-work row">
+		<div class="container coustome-container">    
+ 			 <div class="row fashion m0">
+			     <h2>这就是它的信息<br>找到属于您的房子，打电话给代理商，买它!</h2>
+				<div class="col-md-3 col-sm-6 item">
+					<div class="round-icon">
+						<span class="lnr lnr-magnifier"></span>
+					</div>
+					<h4>搜索房产</h4>
+					<p>Over 3,000 properties</p> 
+				</div>
+				<div class="col-md-3 col-sm-6">
+					<div class="round-icon">
+						<span class="lnr lnr-users"></span>
+					</div>
+					<h4>致电代理</h4>
+					<p>Over 1,000 agents</p> 
+				</div>
+				<div class="col-md-3 col-sm-6">
+					<div class="round-icon">
+						<span class="lnr lnr-cart"></span>
+					</div>
+					<h4>购买 &amp; Buy</h4>
+					<p>Make a good price</p> 
+				</div>
+				<div class="col-md-3 col-sm-6">
+					<div class="round-icon">
+						<span class="lnr lnr-thumbs-up"></span>
+					</div>
+					<h4>You Are Done!</h4>
+					<p>Cheers!</p> 
+				</div>
+				<a href="/index/list" class="find-agent active">搜索房源 <i class="lnr lnr-arrow-right"></i></a>	
+				<a href="/index/index" class="find-agent">查找代理 <i class="lnr lnr-arrow-right"></i></a>	
+			</div>
+		</div>
+	</section>
+    <!-- 主体结束 -->
+   
+   	<!--Latest-Properties -->
+	<section class="latest-properties row"> 
+		<div class="container coustome-container">
+			<div class="row m0 latest_head">
+				<h2>所有代理</h2> 
+				<div class="properties-slider">
+					<% agent.forEach(item=>{%>
+						<div class="item">
+						<div class="ready_flat">
+							<div class="David-Elton">
+								<img src="<%= item.agent_img %>" width="100%" alt="">
+								<div class="content-area">
+									 <h4><%= item.agent_name %></h4>
+									 <h5>从业时间：<%=item.agent_time%> 年</h5>
+									 <div class="Rating">
+										联系方式： <%=item.agent_number%>
+									 </div>
+									 <p style="font-size: 10px;"><%- item.agent_content %> </p>
+								</div>
+							</div>
+						</div> 
+					</div>
+					<% })%>
+					<!-- <div class="item">
+						<div class="ready_flat">
+							<img src="img/home3.jpg" alt="">
+							<div class="content-area">
+								<h4>小店区现成公寓</h4>
+								<a href="" class="btn-flat left">出售</a>
+								<a href="" class="btn-flat">$1750/m^2</a>
+								<a href="" class="btn-flat activ">可用</a> 
+								<ul class="info">
+									<li><i class="lnr lnr-tag"></i> 卧室: 5</li>
+									<li><i class="lnr lnr-tag"></i> 厨房: 5</li>
+									<li><i class="lnr lnr-tag"></i> 客厅: 2</li>
+									<li><i class="lnr lnr-tag"></i> 卫生间: 2</li>
+									<li><i class="lnr lnr-tag"></i> 停车位: 3</li>
+									<li><i class="lnr lnr-tag"></i> 厨房: 3</li>
+								</ul>
+								<a href="#" class="contact">Contact Now <i class="lnr lnr-arrow-right"></i></a>
+								<h3>$8,450</h3>
+							</div>
+						</div> 
+					</div> -->
+				</div> 
+			</div>
+		</div>
+	</section>
+	<!--End Latest-Properties -->
+   
+   <!-- Client’s Testimonials -->
+    <section class="testimonials_area row">
+    	<div class="container coustome-container">
+    		<div class="row m0 testimonials-head">
+    			<h3>客户专题</h3>
+    			<div class="testimonials-carousel">
+					 <% special.forEach(item=>{%>
+						<div class="item">
+						<div class="client">
+							<p><%- item.special_content %></p>
+							 <a href="#"><%= item.special_title %></a>
+						</div>
+						<div class="client-img"> 
+							<img src="<%= item.special_img %>" alt="" class="img-circle"> 
+						</div>
+					</div>
+					<% })%> 
+					<!-- <div class="item">
+						<div class="client">
+							<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+							 laudantium, totam rem aperiam.</p>
+							 <a href="#">托尼 |用户体验设计师</a>
+						</div>
+						<div class="client-img"> 
+							<img src="img/client.jpg" alt="" class="img-circle">
+						</div>
+					</div>  -->
+				</div>
+    		</div>
+    	</div>
+    	<div class="client_logo_section row">
+    		<div class="container coustome-container">
+                <div class="client_logo">
+                    <div class="item">
+                        <a href="#"><img src="img/client_logo.png" alt=""></a>
+                    </div> 
+                    <div class="item">
+                        <a href="#"><img src="img/client_logo2.png" alt=""></a>
+                    </div> 
+                    <div class="item">
+                        <a href="#"><img src="img/client_logo3.png" alt=""></a>
+                    </div> 
+                    <div class="item">
+                        <a href="#"><img src="img/client_logo4.png" alt=""></a>
+                    </div> 
+                    <div class="item">
+                        <a href="#"><img src="img/client_logo5.png" alt=""></a>
+                    </div> 
+                    <div class="item">
+                        <a href="#"><img src="img/client_logo.png" alt=""></a>
+                    </div> 
+                    <div class="item">
+                        <a href="#"><img src="img/client_logo5.png" alt=""></a>
+                    </div> 
+                    <div class="item">
+                        <a href="#"><img src="img/client_logo4.png" alt=""></a>
+                    </div> 
+                </div>
+    		</div>
+    	</div>
+    </section>
+    <!-- End Client’s Testimonials -->
+    
+    <!-- 底部 -->
+	<%- include("common/footer.html") %>
+
+    <!--jQuery JS-->
+    <script src="js/jquery-1.12.0.min.js"></script>
+    <!--Bootstrap JS-->
+    <script src="js/bootstrap.min.js"></script> 
+    <!--Bootstrap-select JS-->
+    <script src="vendors/bootstrap-select/bootstrap-select.min.js"></script>
+    <!--Flexslider JS-->
+    <script src="vendors/flexslider/js/jquery.flexslider.js"></script>
+    <!--Owl Carousel JS-->
+    <!--<script src="vendors/owl-carousel/owl.carousel.min.js"></script>-->
+    <script src="js/owl.carousel.min.js"></script>
+    <!-- Counterup JS -->
+    <script src="js/waypoints.min.js"></script>
+    <script src="vendors/counter/jquery.counterup.min.js"></script>
+    <!--jQuery ui JS-->
+	<script src="js/jquery-ui.min.js"></script>
+	<!-- Swiper JS -->
+    <script src="js/swiper-bundle.min.js"></script>
+
+    <!--Theme-->
+    <script src="js/theme.js"></script>
+	 <!-- Initialize Swiper -->
+	 <script>
+		 var swiper = new Swiper(".mySwiper", {
+        pagination: {
+          el: ".swiper-pagination",
+          type: "progressbar",
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+	  </script>
+</body>
+</html>

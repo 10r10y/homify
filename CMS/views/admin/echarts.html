@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据可视化</title>
+    <link rel="stylesheet" href="./lib/layui/layui/css/layui.css">
+    <style>
+        .list{
+            padding: 10px,15px;
+            background-color: rgb(254, 252, 254);
+        }
+        [class*=layui-col-]{
+            padding:5px;
+        }
+        .list p{
+            font-size: 20px;
+            color: #5FB878;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .project{
+            width: 100%;
+            height: 300px;
+        }
+        .home{
+            width: 100%;
+            height: 300px;
+        }
+        .visit{
+            width: 100%;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="layui-fluid">
+        <div class="layui-card">
+            <div class="layui-card-header">数据统计</div>
+              <div class="layui-card-body">
+                <div class="layui-row">
+                    <div class="layui-col-lg3">
+                        <div class="list">
+                        <h3>项目分类数</h3>
+                    <p><%= project_cate['count(*)'] %></p>
+                    </div>
+                    </div>
+                    <div class="layui-col-lg3">
+                        <div class="list">
+                            <h3>项目数</h3>
+                     <p><%= project['count(*)'] %></p>
+                    </div>
+                    </div>
+                    <div class="layui-col-lg3">
+                        <div class="list">
+                            <h3>代理人数</h3>
+                            <p><%= agent['count(*)'] %></p>
+                    </div>
+                    </div>
+                    <div class="layui-col-lg3">
+                        <div class="list">
+                            <h3>房源数</h3>
+                             <p><%= home['count(*)'] %></p>
+                    </div>
+                    </div>
+            </div>
+            </div>
+            </div>
+
+        <div class="layui-row">
+            <div class="layui-col-lg4">
+                <div class="layui-card">
+                    <div class="layui-card">
+                        <div class="layui-card-header">项目统计</div>
+                        <div class="layui-card-body">
+                            <div class="project"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-lg4">
+                <div class="layui-card">
+                    <div class="layui-card">
+                        <div class="layui-card-header">房源统计</div>
+                        <div class="layui-card-body">
+                            <div class="home"> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-lg4">
+                <div class="layui-card">
+                    <div class="layui-card">
+                        <div class="layui-card-header">访问量统计</div>
+                        <div class="layui-card-body">
+                            <div class="visit"> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
+<script src="./lib/layui/layui/layui.js"></script>
+<script src="../admin/js/echarts.min.js"></script>
+<script>
+    layui.use("jquery",function(){
+        let{$}=layui;
+        $.ajax({
+            type:"get",
+            url:"/admin/echarts/bar",
+            success:(res)=>{
+                if(res.code==1){
+                    res.data.forEach(item=>{
+                        item.value=item.count;
+                        item.name=item.pc_name;
+                        delete item.count;
+                        delete item.pc_name;
+                    })
+                    readProject(res.data);
+                }
+            }
+        })
+
+        //访问量统计
+    $.get("/admin/echarts/barvisit",(res)=>{
+           var arrx=[],arr=[];
+            res.data.forEach(item=>{
+                arrx.push(item.project_title);
+                arr.push(item.num);
+                
+            })
+           renderVisit(arrx,arr); 
+    })
+    })
+
+    //访问量统计
+    function renderVisit(datax,data){
+        var visit=document.querySelector(".visit");
+        var mychart=echarts.init(visit);
+        var option = {
+            xAxis: {
+                    type: 'category',
+                    data: datax
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [
+                    {
+                    data: data,
+                    type: 'line'
+                    }
+                ]
+                };
+         mychart.setOption(option); 
+    }
+
+    //项目统计
+    function readProject(data){
+      var project=document.querySelector(".project");
+     var mychart=echarts.init(project);
+        var  option = {
+        title: {
+            text: '项目统计',
+            left: 'center'
+        },
+        tooltip: {
+            trigger: 'item'
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left'
+        },
+        series: [
+            {
+                name: '项目统计',
+                type: 'pie',
+                radius: ['30%','50%'],
+                data: data,
+                emphasis: {
+                    itemStyle: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }     
+            }
+        ]
+        };
+            mychart.setOption(option);  
+                }
+
+    //房源统计
+    var home=document.querySelector(".home");
+      var mychart=echarts.init(home);
+        var  option = {
+        title: {
+            text: '房源统计',
+            left: 'center'
+        },
+        tooltip: {
+            trigger: 'item'
+        },
+        legend: {
+            orient: 'vertical',
+            left: 'left'
+        },
+        series: [
+            {
+                name: '房源统计',
+                type: 'pie',
+                radius: ['30%','50%'],
+                data: [
+                        { value: 2, name: '出售房源' },
+                        { value: 1, name: '租聘房源' },
+                        { value: 4, name: '二手房源' }
+                        
+                    ],
+                emphasis: {
+                    itemStyle: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }     
+            }
+        ]
+        };
+     mychart.setOption(option);
+      
+  
+</script>

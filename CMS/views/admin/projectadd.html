@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>添加项目</title>
+    <link rel="stylesheet" href="../lib/layui/layui/css/layui.css">
+</head>
+<style>
+   .layui-form-label{
+    margin-top: 5px;
+  } 
+</style>
+<body>
+    <div class="layui-card">
+        <div class="layui-card-header">
+            <span class="layui-breadcrumb">
+                <a href="">项目管理</a>
+                <a><cite>新建项目</cite></a>
+              </span>
+        </div>
+        <div class="layui-card-body">
+            <form class="layui-form" action="" style="width: 800px;">
+                <input type="hidden" name="project_id" >
+                <div class="layui-form-item">
+                    <label class="layui-form-label">项目名称</label>
+                    <div class="layui-input-block">
+                      <input type="text" name="project_title" required  lay-verify="required" placeholder="请输入项目名称" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">项目分类</label>
+                        <div class="layui-input-block">
+                            <select name="pc_id" lay-verify="">
+                                <option value="">请选择一个项目分类</option>
+                                <% category.forEach((item)=>{%>
+                                    <option value="<%= item.pc_id %>"><%=item.pc_name%></option>
+                                <%})%>
+                              </select>     
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">房子位置</label>
+                          <div class="layui-input-block">
+                            <input type="text" name="project_location" required  lay-verify="required" placeholder="请输入房子位置" autocomplete="off" class="layui-input">
+                          </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">房子价格</label>
+                          <div class="layui-input-block">
+                            <input type="text" name="project_price" required  lay-verify="required" placeholder="请输入房子价格" autocomplete="off" class="layui-input">
+                          </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">项目数量</label>
+                          <div class="layui-input-block">
+                            <input type="text" name="num" required  lay-verify="required" placeholder="请输入项目数量" autocomplete="off" class="layui-input">
+                          </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">厨房数量</label>
+                          <div class="layui-input-block">
+                            <input type="text" name="p_kitchen" required  lay-verify="required" placeholder="请输入厨房数量" autocomplete="off" class="layui-input">
+                          </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">卫生间数量</label>
+                          <div class="layui-input-block">
+                            <input type="text" name="p_toilet" required  lay-verify="required" placeholder="请输入卫生间数量" autocomplete="off" class="layui-input">
+                          </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">卧室数量</label>
+                          <div class="layui-input-block">
+                            <input type="text" name="p_bedchamber" required  lay-verify="required" placeholder="请输入卧室数量" autocomplete="off" class="layui-input">
+                          </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">客厅数量</label>
+                          <div class="layui-input-block">
+                            <input type="text" name="p_Livingroom" required  lay-verify="required" placeholder="请输入客厅数量" autocomplete="off" class="layui-input">
+                          </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">停车位数量</label>
+                          <div class="layui-input-block">
+                            <input type="text" name="p_parkingspace" required  lay-verify="required" placeholder="请输入停车位数量" autocomplete="off" class="layui-input">
+                          </div>
+                        </div>
+                          <div class="layui-form-item">
+                            <label class="layui-form-label">项目缩略图</label>
+                            <div class="layui-input-block">
+                                <button type="button" class="layui-btn" id="thumb">
+                                <i class="layui-icon">&#xe67c;</i>上传图片
+                                </button>                      
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">  </label>
+                            <div class="layui-input-block">
+                                <blockquote class="layui-elem-quote">预览图：
+                                    <div><img src="" alt="" style="width:200px;" class="thumb"></div>
+                                    <!-- 隐藏域 -->
+                                    <input type="hidden" name="project_thumb">
+                                </blockquote>                   
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">项目组图</label>
+                            <div class="layui-input-block">
+                                <button type="button" class="layui-btn" id="pthumb">
+                                    <i class="layui-icon">&#xe67c;</i>上传组图
+                            </div>
+                          </div>
+                          <div class="layui-form-item">
+                            <label class="layui-form-label">  </label>
+                            <div class="layui-input-block">
+                                <blockquote class="layui-elem-quote">预览图：
+                                    <div class="imglist">  </div>
+                                    <input type="hidden" name="project_banner">
+                                </blockquote>                   
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">项目描述</label>
+                          <div class="layui-input-block">
+                            <textarea name="project_content" id="richText" style="display:none;"></textarea>
+                          </div>
+                        </div> 
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                              <button class="layui-btn" lay-submit lay-filter="projectForm">立即提交</button>
+                              <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                            </div>
+                          </div>
+            </form>
+        </div>
+      </div>
+</body>
+</html>
+<script src="../lib/layui/layui/layui.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    //注意：折叠面板 依赖 element 模块，否则无法进行功能性操作
+    layui.use(['element','form','jquery','layer','upload','layedit'], function(){
+        var {element,form,$,layer,upload,layedit} = layui;
+            var thumb=document.querySelector(".thumb");
+            var ithumb=document.querySelector("[name=project_thumb]");
+            
+        //缩略图上传
+        upload.render({
+            elem:"#thumb",
+            url:"/admin/project/upload",
+            done:(res)=>{
+                if(res.code==1){
+                    $(".thumb").attr("src",res.url);
+                    $("[name=project_thumb]").val(res.url);
+                }else{
+                    lsyer.msg("图片上传失败");
+                }
+            }
+        })
+
+        //上传组图(节点)
+        var imglist=document.querySelector(".imglist");
+        var pthumbList=[];
+        upload.render({
+            elem:'#pthumb',
+            url:"/admin/project/upload",
+            multiple:true,
+            number:4,
+            done:(res)=>{
+                if(res.code==1){
+                //创建元素节点
+                var elem=document.createElement("img");
+                elem.src=res.url;
+                elem.style.width="200px";
+                imglist.appendChild(elem); 
+                // $("<img width:'200'>").attr("src",res.url).appendTo($(".imgList"));
+                    pthumbList.push(res.url);
+                    $("[name=project_banner]").val(pthumbList.join(","));
+                    
+                }
+                
+            }
+        })
+
+        //富文本编辑器
+       var layeditIns = layedit.build("richText");
+
+      form.on('submit(projectForm)',(data)=>{
+        data.field.project_content=layedit.getContent(layeditIns);
+        console.log(data.field);
+        $.ajax({
+          type:"post",
+          url:"/admin/project/insert",
+          data:data.field,
+          dataType:"json",
+          success:function(res){
+            var {code,msg}=res;
+            if(code==1){
+              layer.open({
+                title:false,
+                content:msg,
+                icon:1
+              })
+            }else{
+              layer.open({
+                title:false,
+                content:msg,
+                icon:2
+              })
+            } 
+          } 
+        })
+        return false;
+      })
+})
+</script>

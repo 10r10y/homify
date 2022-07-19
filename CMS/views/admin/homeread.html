@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>添加导航</title>
+    <link rel="stylesheet" href="../lib/layui/layui/css/layui.css">
+</head>
+<style>
+  .layui-form-label{
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+</style>
+<body>
+    <div class="layui-card">
+        <div class="layui-card-header">
+            <span class="layui-breadcrumb">
+                <a href="">房源管理</a>
+                <a><cite>新建房源</cite></a>
+              </span>
+        </div>
+        <div class="layui-card-body">
+            <form class="layui-form" action="" style="width: 800px;">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">房源名称</label>
+                    <div class="layui-input-block">
+                      <input type="text" name="home_name" disabled value="<%= data.home_name %>" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">房源位置</label>
+                        <div class="layui-input-block">
+                          <input type="text" name="home_location" disabled value="<%= data.home_location %>" autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">房源价格</label>
+                          <div class="layui-input-block">
+                            <input type="text" name="home_price" disabled value="<%= data.home_price %>" autocomplete="off" class="layui-input">
+                          </div>
+                          <div class="layui-form-item">
+                            <label class="layui-form-label">房源排序</label>
+                            <div class="layui-input-block">
+                              <input type="text" name="home_sort" disabled value="<%= data.home_sort %>" autocomplete="off" class="layui-input">
+                            </div>
+                          </div>
+                          <div class="layui-form-item">
+                            <label class="layui-form-label">厨房数量</label>
+                            <div class="layui-input-block">
+                              <input type="text" name="kitchen" disabled value="<%= data.kitchen %>" autocomplete="off" class="layui-input">
+                            </div>
+                          </div>
+                          <div class="layui-form-item">
+                            <label class="layui-form-label">卫生间数量</label>
+                            <div class="layui-input-block">
+                              <input type="text" name="toilet" disabled value="<%= data.toilet %>" autocomplete="off" class="layui-input">
+                            </div>
+                          </div>
+                          <div class="layui-form-item">
+                            <label class="layui-form-label">卧室数量</label>
+                            <div class="layui-input-block">
+                              <input type="text" name="bedchamber" disabled value="<%= data.bedchamber %>" autocomplete="off" class="layui-input">
+                            </div>
+                          </div>
+                          <div class="layui-form-item">
+                            <label class="layui-form-label">客厅数量</label>
+                            <div class="layui-input-block">
+                              <input type="text" name="Living_room" disabled value="<%= data.Living_room%>" autocomplete="off" class="layui-input">
+                            </div>
+                          </div>
+                          <div class="layui-form-item">
+                            <label class="layui-form-label">停车位数量</label>
+                            <div class="layui-input-block">
+                              <input type="text" name="parking_space" disabled value="<%= data.parking_space %>" autocomplete="off" class="layui-input">
+                            </div>
+                          </div>
+                         
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">预览图</label>
+                          <div class="layui-input-block">
+                                <blockquote class="layui-elem-quote" >
+                                    <img src="<%= data.home_img %>" alt="" class="thumb" width="300px">
+                                    <!-- 隐藏域 -->
+                                    <input type="hidden" class="gtthumb" name="home_img">
+                                </blockquote>
+                          </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">房源描述</label>
+                          <div class="layui-input-block">
+                            <textarea name="home_content" id="richText" style="display:none;"><%= data.home_content %></textarea>
+                          </div>
+                        </div> 
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                              <button class="layui-btn" lay-submit lay-filter="homeForm">立即提交</button>
+                              <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                            </div>
+                          </div>
+            </form>
+        </div>
+      </div>
+</body>
+</html>
+<script src="../lib/layui/layui/layui.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    //注意：折叠面板 依赖 element 模块，否则无法进行功能性操作
+    layui.use(['element','form','jquery','layer','upload','layedit'], function(){
+        var {element,form,$,layer,upload,layedit} = layui;
+        //富文本编辑器
+       var layeditIns = layedit.build("richText");
+       
+})
+</script>

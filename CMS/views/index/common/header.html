@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="家居网,家居,home"/>
+    <meta name="description" content="家居网，售房，租聘网站"/>
+	<title>家居网</title>
+   <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'> 
+    <!-- Favicon -->
+    <link rel="icon" href="img/favicon.png" type="image/x-icon" />
+    <!--Bootstrap-->
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="all" /> 
+    <!--Bootstrap-select CSS-->
+	<link rel="stylesheet" type="text/css" href="vendors/bootstrap-select/bootstrap-select.min.css" media="all" />
+    <!--Flexslider CSS-->
+	<link rel="stylesheet" type="text/css" href="vendors/flexslider/css/flexslider.css" media="all" />
+    <!--Owl_Carousel CSS-->
+	<link rel="stylesheet" type="text/css" href="vendors/owl-carousel/owl.carousel.css" media="all" />
+    <!--Linearicons Icons CSS-->
+	<link rel="stylesheet" href="vendors/linearicons/Linearicons.css"> 
+    <!--Font-Awesome CSS-->
+	<link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css"> 
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="css/swiper-bundle.min.css"/>
+
+	<!--主体样式 CSS-->
+	<link rel="stylesheet" type="text/css" href="css/style.css" media="all" /> 
+    <style>
+    p{
+    padding-left:30px;
+    padding-right:30px;
+    padding-top:30px;
+  }
+</style>
+</head>
+
+<body> 
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-xbox"></div>
+    </div>
+
+	<!-- Heder_Top -->
+	<header class="header_top_section row">
+		<div class="container coustome-container">
+			<div class="row top_header">  
+				<a href="#"><i class="lnr lnr-phone-handset"></i> +660-984-893</a> 
+				<a href="#"><i class="lnr lnr-envelope"></i> +660-984-893</a> 
+				<ul>
+					<li><a href="#">隐私条款</a></li>
+					<li><a href="#">支持</a></li>
+					<li><a href="#">帮助</a></li>
+				</ul>
+			</div> 
+		</div>
+	</header>
+	<!-- End Heder_Top  -->
+   
+    <!-- 导航开始 -->
+    <nav class="navbar navbar-default nav_custom row">
+        <div class="container coustome-container">
+            <!-- Brand and mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main_menu" aria-expanded="false">
+                    <span class="sr-only">切换导航</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand_logo" href="/index/index"><img src="img/logo.png" alt="Logo"></a>
+            </div>
+            <!-- Collect the nav home, property  -->
+            <div class="row collapse navbar-collapse" id="main_menu">
+                <ul class="nav navbar-right nav_buttom">
+                    <li><a href="/index/list">查找<i class="lnr lnr-arrow-right"></i></a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-menu">
+                      <% nav.forEach(item=>{%>
+                        <li><a href="<%= item.nav_url %>" title="<%= item.nav_name %>"><%= item.nav_name %></a></li>
+                        <%}) %> 
+                    <!-- <li><a href="/index/index">房源信息</a></li>
+                    <li><a href="/index/about">关于我们</a></li>
+                    <li><a href="/index/list">特色专题</a></li>
+					<li><a href="/index/single">优秀代理人</a></li>  -->
+                </ul>
+            </div>
+        </div> 
+    </nav>  
+    <!-- 导航结束 -->

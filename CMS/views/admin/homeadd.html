@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>添加导航</title>
+    <link rel="stylesheet" href="../lib/layui/layui/css/layui.css">
+</head>
+<style>
+  .layui-form-label{
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+</style>
+<body>
+    <div class="layui-card">
+        <div class="layui-card-header">
+            <span class="layui-breadcrumb">
+                <a href="">房源管理</a>
+                <a><cite>新建房源</cite></a>
+              </span>
+        </div>
+        <div class="layui-card-body">
+            <form class="layui-form" action="" style="width: 800px;">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">房源名称</label>
+                    <div class="layui-input-block">
+                      <input type="text" name="home_name" required  lay-verify="required" placeholder="请输入房源名称" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">房源位置</label>
+                        <div class="layui-input-block">
+                          <input type="text" name="home_location" required  lay-verify="required" placeholder="请输入房源位置" autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">房源价格</label>
+                          <div class="layui-input-block">
+                            <input type="text" name="home_price" required  lay-verify="required" placeholder="请输入房源价格" autocomplete="off" class="layui-input">
+                          </div>
+                          <div class="layui-form-item">
+                            <label class="layui-form-label">房源排序</label>
+                            <div class="layui-input-block">
+                              <input type="text" name="home_sort" required  lay-verify="required" placeholder="请输入房源排序" autocomplete="off" class="layui-input">
+                            </div>
+                          </div>
+                          <div class="layui-form-item">
+                            <label class="layui-form-label">厨房数量</label>
+                            <div class="layui-input-block">
+                              <input type="text" name="kitchen" required  lay-verify="required" placeholder="请输入厨房数量" autocomplete="off" class="layui-input">
+                            </div>
+                          </div>
+                          <div class="layui-form-item">
+                            <label class="layui-form-label">卫生间数量</label>
+                            <div class="layui-input-block">
+                              <input type="text" name="toilet" required  lay-verify="required" placeholder="请输入卫生间数量" autocomplete="off" class="layui-input">
+                            </div>
+                          </div>
+                          <div class="layui-form-item">
+                            <label class="layui-form-label">卧室数量</label>
+                            <div class="layui-input-block">
+                              <input type="text" name="bedchamber" required  lay-verify="required" placeholder="请输入卧室数量" autocomplete="off" class="layui-input">
+                            </div>
+                          </div>
+                          <div class="layui-form-item">
+                            <label class="layui-form-label">客厅数量</label>
+                            <div class="layui-input-block">
+                              <input type="text" name="Living_room" required  lay-verify="required" placeholder="请输入客厅数量" autocomplete="off" class="layui-input">
+                            </div>
+                          </div>
+                          <div class="layui-form-item">
+                            <label class="layui-form-label">停车位数量</label>
+                            <div class="layui-input-block">
+                              <input type="text" name="parking_space" required  lay-verify="required" placeholder="请输入停车位数量" autocomplete="off" class="layui-input">
+                            </div>
+                          </div>
+                          <div class="layui-form-item">
+                            <label class="layui-form-label">房源图片</label>
+                            <div class="layui-input-block">
+                                <button type="button" class="layui-btn" id="pic1">
+                                <i class="layui-icon">&#xe67c;</i>上传图片
+                                </button>                      
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">预览图</label>
+                          <div class="layui-input-block">
+                                <blockquote class="layui-elem-quote" >
+                                    <img src="" alt="" class="thumb" width="300px">
+                                    <!-- 隐藏域 -->
+                                    <input type="hidden" class="gtthumb" name="home_img">
+                                </blockquote>
+                          </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">房源描述</label>
+                          <div class="layui-input-block">
+                            <textarea name="home_content" id="richText" style="display:none;"></textarea>
+                          </div>
+                        </div> 
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                              <button class="layui-btn" lay-submit lay-filter="homeForm">立即提交</button>
+                              <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                            </div>
+                          </div>
+            </form>
+        </div>
+      </div>
+</body>
+</html>
+<script src="../lib/layui/layui/layui.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    //注意：折叠面板 依赖 element 模块，否则无法进行功能性操作
+    layui.use(['element','form','jquery','layer','upload','layedit'], function(){
+        var {element,form,$,layer,upload,layedit} = layui;
+        //富文本编辑器
+       var layeditIns = layedit.build("richText");
+        //图片上传
+        var thumb=document.querySelector(".thumb");
+        var gtthumb=document.querySelector(".gtthumb");
+        upload.render({
+        elem:'#pic1',
+        url:'/admin/home/upload',
+        done:(res)=>{
+            if(res.code==1){
+                thumb.src=res.url;
+                gtthumb.value=res.url;
+            }else{
+                    layer.msg("图片上传失败");
+            }
+        }
+        })
+        //上传数据
+      form.on('submit(homeForm)',(data)=>{
+        console.log($('.layui-btn'));
+        $.ajax({
+          type:"post",
+          url:"/admin/home/insert",
+          data:data.field,
+          dataType:"json",
+          success:function(res){
+            var {code,msg}=res;
+            if(code==1){
+              layer.open({
+                title:false,
+                content:msg,
+                icon:1
+              })
+            }else{
+              layer.open({
+                title:false,
+                content:msg,
+                icon:2
+              })
+            } 
+          } 
+        })
+        return false;
+      })
+});
+</script>

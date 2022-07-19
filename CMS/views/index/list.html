@@ -1,0 +1,160 @@
+﻿
+    <%- include("common/header.html") %> 
+    
+    <!-- Heading-item area -->
+    <section class="heading-item-area">
+        <div class="container coustome-container">
+            <div class="row m0 heading-list">
+                <div class="leftsite-by">
+                    <h3><i class="lnr lnr-funnel"></i> 排序方式：</h3>
+                    <div class="feature_left_content">
+                       <input type="text" placeholder="最新房源" disabled> 
+                   </div>
+                </div>
+                <div class="right-site-bar pull-right">
+                    <form class="navbar-form navbar-right" role="search" action="/index/list" method="get">
+                        <div class="form-group">
+                            <input type="text" name="search" class="form-control form-custom" placeholder="&#xe86f; Search Here">
+                        </div>
+                        <button type="submit" class="btn btn-submit">查找</button>
+                    </form>
+                </div>
+            </div>
+            <div class="row all-widgets-area m0">
+                <div class="col-md-3 col-sm-6 p0">
+                    <div class="widgets">
+                        <h5>位置</h5>
+                        <ul class="list">
+                            <% project.forEach(item=>{%>
+                            <li><%=item.project_location%></li>
+                           <% })%>
+                        </ul>
+                    </div>
+                    <div class="widgets appartnemt">
+                        <h5>公寓类型</h5>
+                        <form role="form" class="radio_area">
+                            <ul class="radio_style">
+                                <% pc.forEach(item=>{%>
+                                <li>
+                                    <label for="f-option"><%=item.pc_name%></label>
+                                </li>
+                                <%})%>
+                                <!-- <li>
+                                    <input type="radio" id="s-option" name="selector">
+                                    <label for="s-option">办公</label>
+                                    <div class="check"></div>
+                                    </li> -->
+                            </ul>
+                        </form>   
+                        
+                    </div>
+                    <div class="widgets appartnemt">
+                        <h5>物业状况</h5>
+                        <form role="form" class="radio_area">
+                            <ul class="radio_style">
+                                <li>
+                                    <input type="radio" id="j-option" name="selector">
+                                    <label for="j-option">待售 </label>
+                                </li>
+                                <li>
+                                    <input type="radio" id="k-option" name="selector">
+                                    <label for="k-option">出租</label>
+                                </li> 
+                            </ul>
+                        </form>   
+                    </div>
+                    <!-- <div class="widgets Price-Range">
+                        <h5>价格范围</h5>
+                        <ul class="list">
+                            <li>
+                                <div id="slider-range"></div>
+                                <input type="text" id="amount" readonly> 
+                            </li>
+                        </ul> 
+                    </div> -->
+                </div>
+                
+                <div class="col-md-9 col-sm-6 post-area">
+                    <% project.forEach(item=>{%>
+						<div class="Building-University">
+                        <div class="Building">
+                            <img src="<%= item.project_thumb %>" alt="">
+                        </div>
+                        <div class="Building-content">
+                            <div class="right-area"> 
+                                <h3><%= item.project_title %></h3> 
+                                <a href="#" class="btn-slide">出售</a>
+                                <a href="#" class="btn-slide activ">可用</a>
+                                <a href="#" class="btn-slide activ"><%=item.project_location%></a>  
+                                <ul class="info">
+                                    <li><i class="lnr lnr-tag"></i> 厨房:<%= item.p_kitchen %></li>
+                                    <li><i class="lnr lnr-tag"></i> 卧室:<%= item.p_bedchamber %></li>
+                                    <li><i class="lnr lnr-tag"></i> 卫生间:<%= item.p_toilet %></li>
+                                    <li><i class="lnr lnr-tag"></i> 客厅:<%= item.p_Livingroom %></li>
+                                    <li><i class="lnr lnr-tag"></i> 便利店:<%= item.p_kitchen %></li>
+                                    <li><i class="lnr lnr-tag"></i> 停车位:<%= item.p_parkingspace %></li>
+                                </ul>
+                                <a href="#" class="Contact">Contact Agent <i class="lnr lnr-arrow-right"></i></a>
+                                <h2><%= item.project_price %></h2>
+                            </div> 
+                        </div>
+                    </div>
+					<% })%>
+                    <!-- <div class="Building-University">
+                        <div class="Building">
+                            <img src="img/property_listing/2.jpg" alt="">
+                        </div>
+                        <div class="Building-content">
+                            <div class="right-area"> 
+                                <h3>大公寓</h3> 
+                                <a href="#" class="btn-slide">2800 Sq Ft</a>
+                                <a href="#" class="btn-slide activ">Available</a> 
+                                <ul class="info">
+                                    <li><i class="lnr lnr-tag"></i> 厨房: 1</li>
+                                    <li><i class="lnr lnr-tag"></i> 卧室: 5</li>
+                                    <li><i class="lnr lnr-tag"></i> 卫生间: 6</li>
+                                    <li><i class="lnr lnr-tag"></i> 客厅: 2</li>
+                                    <li><i class="lnr lnr-tag"></i> 厨房: 3</li>
+                                    <li><i class="lnr lnr-tag"></i> 停车位: 3</li>
+                                </ul>
+                                <a href="#" class="Contact">Contact Agent <i class="lnr lnr-arrow-right"></i></a>
+                                <h2>$12,050</h2> 
+                            </div> 
+                        </div>
+                    </div> -->
+                   
+                    <div class="page">
+                        <button type="button"> <a href="/index/list?limit=3&page=<%=(page-1)<=0?1:(page-1)%>" style="color:black;">上一页</a> </button>
+                        <%for(var i=1;i<=totalPage;i++){%>
+                            <button type="button"><a class="page_a" href="/index/list?limit=3&page=<%=i%>" style="color:black;"> <%=i%> </a></button>
+                        <% }%>
+                       <button type="button"> <a href="/index/list?limit=3&page=<%=(page*1+1)>=3?3:(page*1+1)%>" style="color:black;"> 下一页</a></button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- End Heading-item area -->
+   
+   <!-- 底部 -->
+	<%- include("common/footer.html") %>
+
+    <!--jQuery JS-->
+    <script src="js/jquery-1.12.0.min.js"></script>
+    <!--Bootstrap JS-->
+    <script src="js/bootstrap.min.js"></script> 
+    <!--Bootstrap-select JS-->
+    <script src="vendors/bootstrap-select/bootstrap-select.min.js"></script>
+    <!--Flexslider JS-->
+    <script src="vendors/flexslider/js/jquery.flexslider.js"></script>
+    <!--Owl Carousel JS-->
+    <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
+    <!-- Counterup JS -->
+    <script src="js/waypoints.min.js"></script>
+    <script src="vendors/counter/jquery.counterup.min.js"></script>
+    <!--jQuery ui JS-->
+	<script src="js/jquery-ui.min.js"></script>
+   
+    <!--Theme-->
+    <script src="js/theme.js"></script>

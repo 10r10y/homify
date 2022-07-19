@@ -1,0 +1,19 @@
+.layui-body{
+    position: absolute;
+    left: 200px;
+    top: 60px;
+    right: 0;
+    bottom: 45px;
+    background-color: rgb(253, 251, 250);
+}
+.layui-form-item{
+width: auto;
+margin-top: 10px;
+}
+#updateBox .layui-input{
+    width: 80%;
+}
+#updateBox{
+    width: 400px;
+    display: none;
+}

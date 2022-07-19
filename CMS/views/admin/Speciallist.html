@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>查看导航</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./lib/layui/layui/css/layui.css">
+</head>
+<style>
+  .layui-table-cell{
+    height:60px;
+  }
+</style>
+<body>
+    <div class="layui-card">
+        <div class="layui-card-header">
+            <span class="layui-breadcrumb">
+                <a href="">专题管理</a>
+                <a><cite>编辑专题</cite></a>
+              </span>
+        </div>
+        <div class="layui-card-body">
+          <form class="layui-form" action="">
+            <div class="layui-inline">
+                <div class="layui-input-inline" style="width: 300px;">
+                    <input type="text" name="search" placeholder="请输入客户名称" autocomplete="off" class="layui-input" >
+                  </div>
+                   <button type="button" class="layui-btn"  lay-submit lay-filter="search"><i class="layui-icon layui-icon-search"></i> 搜索</button>
+            </div>
+          </form>
+        </div>
+          <table class="layui-table tableRender" lay-even lay-filter="roles" id="tableAll">
+            
+          </table>
+        </div>
+      </div>
+      <div id="updateBox" >
+        <form class="layui-form" action="" style="display:hidden;">
+         <!-- 隐藏域 --> 
+         <input type="hidden" name="special_id">
+         <div class="layui-form-item">
+           <label class="layui-form-label">客户名称</label>
+           <div class="layui-input-block">
+             <input type="text" name="special_title" required  lay-verify="required"  autocomplete="off" class="layui-input">
+           </div>
+         </div>
+         <div class="layui-form-item">
+           <div class="layui-input-block">
+             <button class="layui-btn updateBox1" lay-submit lay-filter="updateForm" >立即提交</button>
+             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+           </div>
+         </div>
+       </form>
+     </div>
+</body>
+</html>
+
+<script type="text/html" id="title2">
+    <a href="javascript:;" ><i onclick="deleteSpecial('{{d.special_id}}')" class="layui-icon layui-icon-delete" ></i></a>
+    <a href="javascript:;" ><i lay-event="read" class="layui-icon layui-icon-list" ></i></a>
+    <a href="javascript:;" ><i onclick="updateSpecial('{{d.special_id}}')"  class="layui-icon layui-icon-edit"></i></a>       
+</script>
+<script type="text/html" id="title3">
+  <div>
+    <span onclick="fn('{{d.special_id}}','{{d.is_show?0:1}}')"><button class="layui-btn layui-btn-sm {{d.is_show?'':'layui-btn-danger'}}">{{d.is_show?"已启用":"未启用"}}</button></span>
+  </div>
+</script>
+<script src="./lib/layui/layui/layui.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    var $,layer,tableIns,form;
+
+    //修改导航（整体）
+    function updateSpecial(id){
+   var index;
+    $.get(`/admin/special/updateAll?id=${id}`,(res)=>{
+    index= layer.open({
+      title:"修改导航",
+      type:1,
+      content:$("#updateBox")
+    })
+  
+    let data=res.data;
+    $("[name=special_id]").val(data.special_id);
+     $("[name=special_title]").val(data.special_title);
+    form.on("submit(updateForm)",(data)=>{
+      $.ajax({
+        url:"/admin/special/updateAll",
+        type:"post",
+        data:data.field,
+        dataType:"json",
+        success:(res)=>{
+          let {code,msg}=res;
+          if(code==1){
+            //关闭窗口,表格重载,隐藏表单
+            layer.close(index);
+            tableIns.reload();
+           $("#updateBox").toggle();
+          }
+          layer.msg(msg);
+        }
+      })
+      return false;
+    })  
+})
+}
+              //删除(硬删除)
+              function deleteSpecial(id){
+                layer.open({
+              content: '您确定要执行删除操作吗？'
+              ,btn: ['确定', '取消']
+              ,yes: function(index, layero){
+                //按钮【按钮一】的回调
+                $.get(`/admin/special/delete?id=${id}`,(res)=>{
+                  let {code,msg}=res;
+                  if(code){
+                    tableIns.reload();
+                  }
+                  layer.msg(msg);
+                })
+              }
+              ,btn2: function(index, layero){
+                //按钮【按钮二】的回调 
+                //return false 开启该代码可禁止点击该按钮关闭
+              }
+              ,cancel: function(){ 
+                //右上角关闭回调
+                //return false 开启该代码可禁止点击该按钮关闭
+              }   
+              });
+              }
+
+              //启用（软删除）
+              function fn(id,show){
+                console.log(id,show);
+                      $.ajax({
+                        type:"get",
+                        url:`/admin/special/update?id=${id}&show=${show}`,
+                        success:(res=>{
+                          let {code,msg}=res;
+                          if(code==1){
+                            tableIns.reload();
+                          }
+                          layer.msg(msg);
+                        })
+                      })
+                  }
+
+              layui.use(['element','form','jquery','layer','table'], function(){
+              var {element,table} = layui;
+              $=layui.$,layer=layui.layer;
+              form=layui.form;
+              tableIns=table.render({
+              elem: '.tableRender'
+              ,url: '/admin/special/query' //数据接口
+              ,cols: [[ //表头
+              {field: 'special_id', title: 'ID', width:80, sort: true},
+              {field: 'special_title', title: '客户名称'},
+              {field: 'special_img', title: '客户照片',templet:function(d){
+                  return `<div><img src="${d.special_img}" alt=""></div>`
+              }},
+              {field: 'ctime', title: '专题创建时间'},
+              {field: 'is_show', title: '是否显示',templet:"#title3"} ,
+              {field: '', title: '操作',templet:"#title2"}
+              ]],
+              limit:5,
+              page:true,
+              limits:[5,10,15,20]
+              })  ; 
+              //图片显示
+              /*upload.render({
+              elem:"#updateImg",
+              url:"/admin/project/upload",
+              done:(res)=>{
+              if(res.code==1){
+                $(".thumb").attr("src",res.url);
+                $("[name=banner_img]").val(res.url);
+              }else{
+                layer.msg("图片上传失败");
+              }
+              }
+              })*/  
+
+              //表格行事件
+              table.on('tool(roles)', function(obj){
+              switch (obj.event){
+              case "read":
+                 location.href=`/admin/special/list?id=${obj.data.special_id}`;
+                break;
+                case "edit":
+                console.log("22222");
+                  break;
+              } 
+              });
+
+               //搜索功能
+              form.on("submit(search)",(data)=>{
+              tableIns.reload({
+                where: { //设定异步数据接口的额外参数，任意设
+                  search:data.field.search
+                },
+              page: {
+              curr: 1 //重新从第 1 页开始
+                }
+              })
+              })  
+
+              })
+</script>

@@ -1,0 +1,203 @@
+﻿   <%- include("common/header.html") %> 
+    
+     <!-- Banner -->
+     <section class="banner-area row">
+         <h2>关于我们</h2>
+         <div class="bottom-menu-area">
+             <a href="/index/index">家居网</a>
+             <i class="lnr lnr-chevron-right"></i>
+             <a href="/index/about">关于</a>
+             <i class="lnr lnr-chevron-right"></i>
+             <a href="/index/about">关于我们</a>
+         </div>
+     </section>
+     <!-- End Banner -->
+     
+     <!-- Company -->
+     <section class="company-area row">
+         <div class="container coustome-container">
+             <div class="row company">
+                 <div class="company-ing">
+                     <img src="img/company-img.jpg" alt="">
+                 </div>
+                 <div class="company-content-area">
+                     <h3>关于我们公司</h3>
+                     <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam</p>
+                 </div>
+             </div>
+         </div>
+     </section>
+     <!-- End Company -->
+  
+     <!-- We ensure area -->
+     <section class="We-ensure-area row">
+         <div class="container coustome-container">
+             <div class="row better-business">
+                 <h2>我们确保为您提供更好的业务</h2>
+                 <div class="col-md-4 col-sm-6">
+                     <div class="Appartments">
+                         <i class="lnr lnr-apartment"></i>
+                         <h3>最好的公寓</h3>
+                         <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consentur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                     </div>
+                 </div>
+                 <div class="col-md-4 col-sm-6">
+                     <div class="Appartments">
+                         <i class="lnr lnr-license"></i>
+                         <h3>由政府授权的原始许可</h3>
+                         <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consentur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                     </div>
+                 </div>
+                 <div class="col-md-4 col-sm-6">
+                     <div class="Appartments">
+                         <i class="lnr lnr-cog"></i>
+                         <h3>强大的客户支持</h3>
+                         <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consentur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+                     </div>
+                 </div>
+                 <div class="col-md-12 fashion-btn">
+                    <a href="/index/list" class="find-agent active">寻找房源<i class="lnr lnr-arrow-right"></i></a>	
+                    <a href="/index/single" class="find-agent">寻找代理<i class="lnr lnr-arrow-right"></i></a>	
+                 </div>
+             </div>
+         </div>
+     </section>
+     <!-- End We ensure area -->
+     
+     <!-- Client-banner area -->
+     <section class="client-banner-area row">
+         <img src="img/client-banner.jpg" alt="">
+     </section>
+     <!-- End Client-banner area -->
+     
+    
+    <!-- Popular Agents -->
+    <section class="popular-agents-area">
+        <div class="container coustome-container">
+            <div class="row popular-agents">
+				<h2>热门代理商</h2> 
+                <% agent.forEach(item=>{%>
+                    <div class="col-md-3 col-sm-6">
+                   <div class="David-Elton">
+                       <img src="<%= item.agent_img %>" width="100%" alt="">
+                       <div class="content-area">
+                            <h4><%= item.agent_name %></h4>
+                            <h5>优秀代理人</h5>
+                            <div class="Rating">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                            </div>
+                            <p style="font-size: 10px;"><%- item.agent_content %> </p>
+                            <a href="#">现在联系<i class="lnr lnr-arrow-right"></i></a>	
+                       </div>
+                   </div>
+               </div>
+                <% })%>
+               <!-- <div class="col-md-3 col-sm-6">
+                   <div class="David-Elton">
+                       <img src="img/Popular/popular-4.jpg" alt="">
+                       <div class="content-area">
+                        <h4>乔丹</h4>
+                        <h5>优秀代理人</h5>
+                            <div class="Rating">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                            </div>
+                            <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut </p>
+                            <a href="#">现在联系<i class="lnr lnr-arrow-right"></i></a>	
+                       </div>
+                   </div>
+               </div>  -->
+               <div class="col-md-12">
+                  <div class="agent-btn">
+                     <a href="/index/index" class="All-Agents">查看所有代理 <i class="lnr lnr-arrow-right"></i></a>	
+                  </div>
+               </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Popular Agents -->
+    
+ <!-- Client’s Testimonials -->
+ <section class="testimonials_area row">
+    <div class="container coustome-container">
+        <div class="row m0 testimonials-head">
+            <h3>客户感言</h3>
+            <div class="testimonials-carousel">
+                <% special.forEach(item=>{%>
+                    <div class="item">
+                    <div class="client">
+                        <p style="font-size:10px;"><%- item.special_content %></p>
+                         <a href="#"><%= item.special_title %></a>
+                    </div>
+                    <div class="client-img"> 
+                        <img src="<%= item.special_img %>" alt="" class="img-circle"> 
+                    </div>
+                </div>
+                <% })%> 
+                 
+            </div>
+        </div>
+    </div>
+    <div class="client_logo_section row">
+        <div class="container coustome-container">
+            <div class="client_logo">
+                <div class="item">
+                    <a href="#"><img src="img/client_logo.png" alt=""></a>
+                </div> 
+                <div class="item">
+                    <a href="#"><img src="img/client_logo2.png" alt=""></a>
+                </div> 
+                <div class="item">
+                    <a href="#"><img src="img/client_logo3.png" alt=""></a>
+                </div> 
+                <div class="item">
+                    <a href="#"><img src="img/client_logo4.png" alt=""></a>
+                </div> 
+                <div class="item">
+                    <a href="#"><img src="img/client_logo5.png" alt=""></a>
+                </div> 
+                <div class="item">
+                    <a href="#"><img src="img/client_logo.png" alt=""></a>
+                </div> 
+                <div class="item">
+                    <a href="#"><img src="img/client_logo5.png" alt=""></a>
+                </div> 
+                <div class="item">
+                    <a href="#"><img src="img/client_logo4.png" alt=""></a>
+                </div> 
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Client’s Testimonials -->
+
+<!-- 底部 -->
+<%- include("common/footer.html") %>
+
+	    <!--jQuery JS-->
+    <script src="js/jquery-1.12.0.min.js"></script>
+    <!--Bootstrap JS-->
+    <script src="js/bootstrap.min.js"></script> 
+    <!--Bootstrap-select JS-->
+    <script src="vendors/bootstrap-select/bootstrap-select.min.js"></script>
+    <!--Flexslider JS-->
+    <script src="vendors/flexslider/js/jquery.flexslider.js"></script>
+    <!--Owl Carousel JS-->
+    <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
+    <!-- Counterup JS -->
+    <script src="js/waypoints.min.js"></script>
+    <script src="vendors/counter/jquery.counterup.min.js"></script>
+    <!--jQuery ui JS-->
+	<script src="js/jquery-ui.min.js"></script>
+   
+    <!--Theme-->
+    <script src="js/theme.js"></script>
+</body>
+</html>

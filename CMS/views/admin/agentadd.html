@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>添加导航</title>
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../lib/layui/layui/css/layui.css">
+</head>
+<body>
+    <div class="layui-card">
+        <div class="layui-card-header">
+            <span class="layui-breadcrumb">
+                <a href="">代理人管理</a>
+                <a><cite>新建代理人</cite></a>
+              </span>
+        </div>
+        <div class="layui-card-body">
+            <form class="layui-form" action="" style="width: 800px;">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">代理人名称</label>
+                    <div class="layui-input-block">
+                      <input type="text" name="agent_name" required  lay-verify="required" placeholder="请输入代理人名称" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">从业时间</label>
+                        <div class="layui-input-block">
+                          <input type="text" name="agent_time" required  lay-verify="required" placeholder="请输入从业时间" autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">联系方式</label>
+                          <div class="layui-input-block">
+                            <input type="text" name="agent_number" required  lay-verify="required" placeholder="请输入联系方式" autocomplete="off" class="layui-input">
+                          </div>
+                          <div class="layui-form-item">
+                            <label class="layui-form-label">代理人照片</label>
+                            <div class="layui-input-block">
+                                <button type="button" class="layui-btn" id="pic1">
+                                <i class="layui-icon">&#xe67c;</i>上传图片
+                                </button>                      
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">   </label>
+                          <div class="layui-input-block">
+                                <blockquote class="layui-elem-quote" >
+                                    <img src="" alt="" class="thumb" width="300px">
+                                    <!-- 隐藏域 -->
+                                    <input type="hidden" class="gtthumb" name="agent_img">
+                                </blockquote>
+                          </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">代理人感言</label>
+                            <div class="layui-input-block">
+                              <textarea name="agent_content" id="richText" style="display:none;"></textarea>
+                            </div>
+                          </div> 
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                              <button class="layui-btn" lay-submit lay-filter="agentForm">立即提交</button>
+                              <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                            </div>
+                          </div>
+            </form>
+        </div>
+      </div>
+</body>
+</html>
+<script src="../lib/layui/layui/layui.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+     layui.use(['element','upload','layer','form','jquery','layedit'], function(){
+        var {element,upload,layer,form,$,layedit} = layui;
+        //富文本编辑器
+       var layeditIns = layedit.build("richText");
+        //图片上传
+        var thumb=document.querySelector(".thumb");
+        var gtthumb=document.querySelector(".gtthumb");
+        upload.render({
+        elem:'#pic1',
+        url:'/admin/agent/upload',
+        done:(res)=>{
+            if(res.code==1){
+                thumb.src=res.url;
+                gtthumb.value=res.url;
+            }else{
+                    layer.msg("图片上传失败");
+            }
+        }
+        })
+        //数据上传
+        form.on("submit(agentForm)",(data)=>{
+            console.log(data.field);
+            $.ajax({
+                type:'post',
+                url:'/admin/agent/inserted',
+                data:data.field,
+                dataType:"json",
+                success:function(res){
+                   var {code,msg}=res;
+                    if(code==1){
+                        layer.open({
+                            title:false,
+                            content:msg,
+                            icon:1  
+                        })
+                    }else{
+                        layer.open({
+                            title:false,
+                            content:msg,
+                            icon:2  
+                        })
+                    }  
+                }
+            })
+         return false;
+        })  
+});         
+</script>

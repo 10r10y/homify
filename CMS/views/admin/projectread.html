@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>查看项目</title>
+    <link rel="stylesheet" href="../lib/layui/layui/css/layui.css">
+</head>
+<style>
+   .layui-form-label{
+    margin-top: 5px;
+  } 
+</style>
+<body>
+    <div class="layui-card">
+        <div class="layui-card-header">
+            <span class="layui-breadcrumb">
+                <a href="">项目管理</a>
+                <a><cite>展示项目</cite></a>
+              </span>
+        </div>
+        <div class="layui-card-body">
+            <form class="layui-form" action="" style="width: 800px;">
+                <input type="hidden" name="project_id" >
+                <div class="layui-form-item">
+                    <label class="layui-form-label">项目名称</label>
+                    <div class="layui-input-block">
+                      <input type="text" name="project_title" disabled value="<%= data.project_title %>" class="layui-input">
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">项目分类</label>
+                        <div class="layui-input-block">
+                    <input type="text" name="pc_name" disabled value="<%= data.pc_name %>" class="layui-input">
+                        </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">房子位置</label>
+                          <div class="layui-input-block">
+                            <input type="text" name="project_location" disabled value="<%= data.project_location %>" class="layui-input">
+                          </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">房子价格</label>
+                          <div class="layui-input-block">
+                            <input type="text" name="project_price" disabled value="<%= data.project_price %>" autocomplete="off" class="layui-input">
+                          </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">厨房数量</label>
+                          <div class="layui-input-block">
+                            <input type="text" name="p_kitchen" disabled value="<%= data.p_kitchen %>" autocomplete="off" class="layui-input">
+                          </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">卫生间数量</label>
+                          <div class="layui-input-block">
+                            <input type="text" name="p_toilet" disabled value="<%= data.p_toilet %>" autocomplete="off" class="layui-input">
+                          </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">卧室数量</label>
+                          <div class="layui-input-block">
+                            <input type="text" name="p_bedchamber" disabled value="<%= data.p_bedchamber %>" autocomplete="off" class="layui-input">
+                          </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">客厅数量</label>
+                          <div class="layui-input-block">
+                            <input type="text" name="p_Livingroom" disabled value="<%= data.p_Livingroom%>" autocomplete="off" class="layui-input">
+                          </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">停车位数量</label>
+                          <div class="layui-input-block">
+                            <input type="text" name="p_parkingspace" disabled value="<%= data.p_parkingspace %>" autocomplete="off" class="layui-input">
+                          </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">项目缩略图 </label>
+                            <div class="layui-input-block">
+                                <blockquote class="layui-elem-quote">
+                                    <div><img src="<%= data.project_thumb %>" alt="" style="width:200px;" class="thumb"></div>
+                                </blockquote>                   
+                            </div>
+                        </div>
+                       
+                          <div class="layui-form-item">
+                            <label class="layui-form-label"> 项目组图 </label>
+                            <div class="layui-input-block">
+                               <% data.project_banner.split(",").forEach((item)=>{ %>
+                                 <img width="300px" src="<%= item %>" alt="">       
+                              <% }) %>                  
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">项目描述</label>
+                          <div class="layui-input-block">
+                            <textarea name="project_content" id="richText" style="display:none;"><%= data.project_content %></textarea>
+                          </div>
+                        </div> 
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">创建时间</label>
+                          <div class="layui-input-block">
+                          <input type="text" name="ctime" disabled value="<%= data.ctime %>" class="layui-input">
+                          </div>
+                          </div> 
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">是否删除</label>
+                            <div class="layui-input-block">
+                                <% if(data.is_delete==1){%>
+                                <input type="checkbox" name="yyy" lay-skin="switch" lay-text="已删除|未删除" checked>
+                                    <%}else{%>
+                                <input type="checkbox" name="yyy" lay-skin="switch" lay-text="已删除|未删除">
+                                 <%} %>
+                                
+                            </div>
+                          </div> 
+            </form>
+        </div>
+      </div>
+</body>
+</html>
+<script src="../lib/layui/layui/layui.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    //注意：折叠面板 依赖 element 模块，否则无法进行功能性操作
+    layui.use(['element','form','jquery','layer','upload','layedit'], function(){
+        var {element,form,$,layer,upload,layedit} = layui;
+        layedit.build("richText");
+    })
+</script>

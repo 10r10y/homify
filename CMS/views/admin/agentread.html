@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../lib/layui/layui/css/layui.css">
+</head>
+<style>
+  .layui-form-label{
+   margin-top: 5px;
+ } 
+</style>
+<body>
+    <div class="layui-card">
+        <div class="layui-card-header">
+            <span class="layui-breadcrumb">
+                <a href="">代理人管理</a>
+                <a><cite>展示代理人</cite></a>
+              </span>
+        </div>
+        <div class="layui-card-body">
+            <form class="layui-form" action="" style="width: 800px;">
+                <input type="hidden" name="agent_id" >
+                <div class="layui-form-item">
+                    <label class="layui-form-label">代理人名称</label>
+                    <div class="layui-input-block">
+                      <input type="text" name="agent_name" disabled value="<%= data.agent_name %>" class="layui-input">
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">从业时间</label>
+                        <div class="layui-input-block">
+                          <input type="text" name="agent_time" disabled value="<%= data.agent_time %>" class="layui-input">
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">联系方式</label>
+                            <div class="layui-input-block">
+                              <input type="text" name="agent_number" disabled value="<%= data.agent_number %>" class="layui-input">
+                            </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">代理人照片 </label>
+                            <div class="layui-input-block">
+                                <blockquote class="layui-elem-quote">
+                                    <div><img src="<%= data.agent_img %>" alt="" style="width:200px;" class="thumb"></div>
+                                </blockquote>                   
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">代理人感言</label>
+                          <div class="layui-input-block">
+                            <textarea name="agent_content" id="richText" style="display:none;"><%= data.agent_content %></textarea>
+                          </div>
+                        </div> 
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">创建时间</label>
+                            <div class="layui-input-block">
+                            <input type="text" name="ctime" disabled value="<%= data.ctime %>" class="layui-input">
+                            </div>
+                            </div> 
+            </form>
+        </div>
+      </div>
+</body>
+</html>
+<script src="../lib/layui/layui/layui.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    //注意：折叠面板 依赖 element 模块，否则无法进行功能性操作
+    layui.use(['element','form','jquery','layer','upload','layedit'], function(){
+        var {element,form,$,layer,upload,layedit} = layui;
+        layedit.build("richText");
+    })
+</script>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>添加导航</title>
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../lib/layui/layui/css/layui.css">
+</head>
+<body>
+    <div class="layui-card">
+        <div class="layui-card-header">
+            <span class="layui-breadcrumb">
+                <a href="">专题管理</a>
+                <a><cite>新建专题</cite></a>
+              </span>
+        </div>
+        <div class="layui-card-body">
+            <form class="layui-form" action="" style="width: 800px;">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">客户名称</label>
+                    <div class="layui-input-block">
+                      <input type="text" name="special_title" required  lay-verify="required" placeholder="请输入客户名称" autocomplete="off" class="layui-input">
+                    </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">客户照片</label>
+                          <div class="layui-input-block">
+                              <button type="button" class="layui-btn" id="pic1">
+                              <i class="layui-icon">&#xe67c;</i>上传图片
+                              </button>                      
+                          </div>
+                      </div>
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">预览图</label>
+                        <div class="layui-input-block">
+                              <blockquote class="layui-elem-quote" >
+                                <div><img src="" alt="" style="width:200px;" class="thumb"></div>
+                                <!-- 隐藏域 -->
+                                <input type="hidden" name="special_img">
+                              </blockquote>
+                        </div>
+                      </div>
+                      <div class="layui-form-item">
+                        <label class="layui-form-label">客户感言</label>
+                        <div class="layui-input-block">
+                          <textarea name="special_content" id="richText" style="display:none;"></textarea>
+                        </div>
+                      </div> 
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                              <button class="layui-btn" lay-submit lay-filter="specialForm">立即提交</button>
+                              <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                            </div>
+                          </div>
+            </form>
+        </div>
+      </div>
+</body>
+</html>
+<script src="../lib/layui/layui/layui.js"></script>
+<script>
+       layui.use(['element','form','jquery','layer','upload','layedit'], function(){
+        var {element,form,$,layer,upload,layedit} = layui;
+            var thumb=document.querySelector(".thumb");
+            var ithumb=document.querySelector("[name=special_img]");
+            
+        //缩略图上传
+        upload.render({
+            elem:"#pic1",
+            url:"/admin/special/upload",
+            done:(res)=>{
+                if(res.code==1){
+                    $(".thumb").attr("src",res.url);
+                    $("[name=special_img]").val(res.url);
+                }else{
+                    lsyer.msg("图片上传失败");
+                }
+            }
+        })
+      
+        //富文本编辑器
+       var layeditIns = layedit.build("richText");
+
+      form.on('submit(specialForm)',(data)=>{
+        data.field.special_content=layedit.getContent(layeditIns);
+        console.log(data.field);
+        $.ajax({
+          type:"post",
+          url:"/admin/special/insert",
+          data:data.field,
+          dataType:"json",
+          success:function(res){
+            var {code,msg}=res;
+            if(code==1){
+              layer.open({
+                title:false,
+                content:msg,
+                icon:1
+              })
+            }else{
+              layer.open({
+                title:false,
+                content:msg,
+                icon:2
+              })
+            } 
+          } 
+        })
+        return false;
+      })
+});
+</script>

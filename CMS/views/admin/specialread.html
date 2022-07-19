@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>查看专题</title>
+    <link rel="stylesheet" href="../lib/layui/layui/css/layui.css">
+</head>
+<style>
+   .layui-form-label{
+    margin-top: 5px;
+  } 
+</style>
+<body>
+    <div class="layui-card">
+        <div class="layui-card-header">
+            <span class="layui-breadcrumb">
+                <a href="">专题管理</a>
+                <a><cite>展示专题内容</cite></a>
+              </span>
+        </div>
+        <div class="layui-card-body">
+            <form class="layui-form" action="" style="width: 800px;">
+                <input type="hidden" name="special_id" >
+                <div class="layui-form-item">
+                    <label class="layui-form-label">客户名称</label>
+                    <div class="layui-input-block">
+                      <input type="text" name="special_title" disabled value="<%= data.special_title %>" class="layui-input">
+                    </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">客户照片 </label>
+                            <div class="layui-input-block">
+                                <blockquote class="layui-elem-quote">
+                                    <div><img src="<%= data.special_img %>" alt="" style="width:200px;" class="thumb"></div>
+                                </blockquote>                   
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                          <label class="layui-form-label">客户感言</label>
+                          <div class="layui-input-block">
+                            <textarea name="special_content" id="richText" style="display:none;"><%= data.special_content %></textarea>
+                          </div>
+                        </div> 
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">创建时间</label>
+                            <div class="layui-input-block">
+                            <input type="text" name="ctime" disabled value="<%= data.ctime %>" class="layui-input">
+                            </div>
+                            </div> 
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">是否启用</label>
+                            <div class="layui-input-block">
+                                <% if(data.is_show==1){%>
+                                <input type="checkbox" name="yyy" lay-skin="switch" lay-text="已启用|未启用" checked>
+                                    <%}else{%>
+                                <input type="checkbox" name="yyy" lay-skin="switch" lay-text="已启用|未启用">
+                                 <%} %>
+                            </div>
+                          </div> 
+            </form>
+        </div>
+      </div>
+</body>
+</html>
+<script src="../lib/layui/layui/layui.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    //注意：折叠面板 依赖 element 模块，否则无法进行功能性操作
+    layui.use(['element','form','jquery','layer','upload','layedit'], function(){
+        var {element,form,$,layer,upload,layedit} = layui;
+        layedit.build("richText");
+    })
+</script>
