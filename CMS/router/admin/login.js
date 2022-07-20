@@ -12,10 +12,8 @@ const {login_schema}=require("../../schema/login");
 
 //加密
 //var a=crypto.AES.encrypt("123456","architect").toString();
-//console.log(a);
 //解密
 //  var b=crypto.AES.decrypt(a,"architect").toString(crypto.enc.Utf8);
-//  console.log(b);
 
 //渲染登录页面
 router.get("/",(req,res)=>{
@@ -28,7 +26,6 @@ router.post("/",(req,res)=>{
     //操作数据库
     const sql="select * from admin";
     db.query(sql,(err,results)=>{
-        console.log(err, results);
         var pass=crypto.AES.decrypt(results[0].password,"architect").toString(crypto.enc.Utf8);   
         if(username==results[0].username&&password==pass){
             req.session.userinfo=results[0];   //存用户信息session

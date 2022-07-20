@@ -1,4 +1,6 @@
+// 创建 express 服务器
 const express = require('express');
+// app 
 const app = express();
 const ejs = require('ejs');
 const path = require('path');
@@ -38,8 +40,8 @@ const indexRouter = require('./router/index');
 app.use('/index', indexRouter);
 
 //错误级中间件
-app.use(function (err, req, res, next) {
-    //joi.ValidationError构造函数   instanceof判断对象是否由构造函数实例化
+app.use(function(err, req, res, next) {
+    // 判断对象是否由 joi.ValidationError 构造函数实例化
     if (err instanceof joi.ValidationError) {
         //数据验证失败
         return res.send({
@@ -53,6 +55,7 @@ app.use(function (err, req, res, next) {
     });
 });
 
+// 启动服务器
 app.listen(3000, () => {
     console.log(`http://localhost:3000/index/index`);
     console.log(`http://localhost:3000/admin/login`);

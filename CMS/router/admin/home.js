@@ -9,9 +9,8 @@ const upload = require('../../lib/upload');
 router.get('/insert', (req, res) => {
     res.render('admin/homeadd');
 });
-//图片上传
+//图片上传（第二个参数是局部中间件）
 router.post('/upload', upload.single('file'), (req, res) => {
-    //console.log(req.file);
     res.send({
         code: 1,
         url: '/uploads/' + req.file.filename,
@@ -67,13 +66,15 @@ router.get('/', (req, res) => {
     res.render('admin/homelist');
 });
 
-//查看房源信息(渲染页面)
+//查看房源信息(提供给 Layui-table 渲染页面)
 router.get('/query', (req, res) => {
     //查询数据
     let isSearch = req.query.search ? req.query.search : '';
+    // 每页条数， 当前页数
     const { limit, page } = req.query;
+
     const offset = (page - 1) * limit;
-    var count;
+    let count;
     //查询数据总数
     const sqlstr = `select count(*) as count from home where home_name like'%${isSearch}%'`;
     db.query(sqlstr, (err, results) => {
@@ -81,7 +82,6 @@ router.get('/query', (req, res) => {
         count = results[0].count;
     });
     const sql = `select * from home where home_name like'%${isSearch}%' limit ${offset},${limit}`;
-    // const sql='select * from home';
     db.query(sql, (err, results) => {
         //sql语句执行失败
         if (err) return res.send({ code: 1, msg: err.message });
@@ -89,6 +89,7 @@ router.get('/query', (req, res) => {
             results.forEach((item) => {
                 item.ctime = item.ctime.toLocaleString();
             });
+            // 此条数据返回给 table-url
             return res.send({
                 code: 0,
                 msg: '数据查询成功',
@@ -133,7 +134,7 @@ router.get('/update', (req, res) => {
     });
 });
 
-//整体修改-获取数据
+//修改-获取数据：home 中整条房源
 router.get('/updateAll', (req, res) => {
     const sql = 'select * from home where home_id=?';
     db.query(sql, req.query.id, (err, results) => {
@@ -152,6 +153,7 @@ router.get('/updateAll', (req, res) => {
         }
     });
 });
+// 修改-修改数据
 router.post('/updateAll', (req, res) => {
     const { home_id, home_name, home_location } = req.body;
     const sql = `update home set home_name='${home_name}',home_location='${home_location}' where home_id='${home_id}'`;
@@ -173,18 +175,18 @@ router.post('/updateAll', (req, res) => {
 
 //删除
 router.get('/delete', (req, res) => {
-    //console.log(req.query);
     const { id, img } = req.query;
     const sql = 'delete from home where home_id=?';
     db.query(sql, id, (err, results) => {
         if (err) return res.send({ code: 0, msg: err.message });
+        // 受影响的行数为 1 时
         if (results.affectedRow == 1) {
             const url = path.join(__dirname, '../../static', img);
             fs.unlink(url, (error) => {
                 if (error)
                     return res.send({
                         code: 0,
-                        msg: `图片删除失败:$(error.message)`,
+                        msg: `图片删除失败:${error.message}`,
                     });
             });
             res.send({
