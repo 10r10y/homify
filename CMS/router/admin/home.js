@@ -134,7 +134,7 @@ router.get('/update', (req, res) => {
     });
 });
 
-//修改-获取数据：home 中整条房源
+//修改-获取数据：返回 home 对应 id 的整条房源
 router.get('/updateAll', (req, res) => {
     const sql = 'select * from home where home_id=?';
     db.query(sql, req.query.id, (err, results) => {
@@ -153,7 +153,7 @@ router.get('/updateAll', (req, res) => {
         }
     });
 });
-// 修改-修改数据
+// 修改-修改数据：
 router.post('/updateAll', (req, res) => {
     const { home_id, home_name, home_location } = req.body;
     const sql = `update home set home_name='${home_name}',home_location='${home_location}' where home_id='${home_id}'`;

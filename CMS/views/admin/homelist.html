@@ -18,7 +18,7 @@
             <!-- 面包屑 -->
             <div class="layui-card-header">
                 <span class="layui-breadcrumb">
-                    <a href="">房源管理</a>
+                    <a>房源管理</a>
                     <a><cite>编辑房源</cite></a>
                 </span>
             </div>
@@ -46,7 +46,6 @@
                     </div>
                 </form>
             </div>
-            <div id="test"><h1>Test!!!!!!!!!</h1></div>
             <!-- 渲染表格 -->
             <table
                 id="tableAll"
@@ -108,14 +107,18 @@
     <!-- 操作模板 -->
     <script type="text/html" id="title2">
         <div>
+            <!-- 删除 -->
             <a href="#"><i
                     onclick="deleteHome('{{d.home_id}}','{{d.home_img}}')"
                     class="layui-icon layui-icon-delete"
                 ></i>
             </a>
-            <a href="javascript:;"
-                ><i lay-event="read" class="layui-icon layui-icon-list"></i
-            ></a>
+            <!-- 跳转详情 -->
+            <a href="javascript:;">
+                <!-- 触发行单击事件 -->
+                <i lay-event="read" class="layui-icon layui-icon-list"></i>
+            </a>
+            <!-- 修改 -->
             <a href="#"
                 ><i
                     onclick="updateHome('{{d.home_id}}')"
@@ -206,6 +209,7 @@
                     $.ajax({
                         url: '/admin/home/updateAll',
                         type: 'post',
+                        // data.field 获取 layui-form 中表单数据
                         data: data.field,
                         dataType: 'json',
                         success: (res) => {
@@ -263,11 +267,11 @@
                 limit: 3,   // 每页条数
                 limits: [3, 5, 10, 15],
             });
-            //表格行事件（查看详情）
+            // 触发行单击事件
             table.on('tool(roles)', function (obj) {
-                console.log(obj);
                 switch (obj.event) {
                     case 'read':
+                        // 跳转到对应详情页
                         location.href = `/admin/home/list?id=${obj.data.home_id}`;
                         break;
                 }
